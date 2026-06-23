@@ -5,7 +5,7 @@ global:
   server_name: "my-dendrite.onrender.com"
   
   # Секретный ключ (сервер создаст его сам при первом запуске)
-  private_key: "matrix_key.pem"
+  private_key: "/tmp/matrix_key.pem"
   
   # База данных прямо внутри контейнера
   database:
