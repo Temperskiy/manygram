@@ -7,9 +7,17 @@ import (
 )
 
 func main() {
-	// Сразу запускаем уже скачанный в Build Command файл
+	// 1. Генерируем ключ прямо в текущей папке, если его нет
+	if _, err := os.Stat("matrix_key.pem"); os.IsNotExist(err) {
+		log.Println("Generating matrix_key.pem...")
+		cmdKey := exec.Command("/opt/render/project/go/bin/generate-keys", "--private-key", "matrix_key.pem")
+		cmdKey.Stdout = os.Stdout
+		cmdKey.Stderr = os.Stderr
+		_ = cmdKey.Run() // Пробуем сгенерировать
+	}
+
+	// 2. Запускаем Dendrite
 	log.Println("Starting Dendrite...")
-	// Путь к dendrite меняем на тот, куда его положил 'go install'
 	cmdRun := exec.Command("/opt/render/project/go/bin/dendrite", "--config", "dendrite.yaml", "-http-bind-address", ":10000")
 	cmdRun.Stdout = os.Stdout
 	cmdRun.Stderr = os.Stderr
