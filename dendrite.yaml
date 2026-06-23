@@ -1,29 +1,9 @@
 version: 2
-
 global:
-  # Твой точный адрес сервера без https://
   server_name: "my-dendrite.onrender.com"
-  
-  # Секретный ключ (сервер создаст его сам при первом запуске)
   private_key: "matrix_key.pem"
-  
-  # База данных прямо внутри контейнера
   database:
     connection: "file:dendrite.db"
-
-logging:
-  - type: "std"
-    level: "info"
-
 client_api:
-  # Регистрация ОТКРЫТА, чтобы ты смог создать аккаунт через Element X
   registration_disabled: false
-  allow_guests: false
-
-media_api:
-  max_file_size_bytes: 52428800
-  dynamic_thumbnails: true
-
-sync_api:
-  real_time_channels: true
   
