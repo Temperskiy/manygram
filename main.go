@@ -16,10 +16,9 @@ func main() {
 		log.Fatalf("Failed to download Dendrite: %v", err)
 	}
 
-	// 2. Запускаем Dendrite с нашим файлом конфигурации
+	// 2. Запускаем Dendrite с портом 10000, который требует Render
 	log.Println("Starting Dendrite...")
-	// Путь куда Go устанавливает бинарники по умолчанию в Linux
-	cmdRun := exec.Command("/opt/render/project/go/bin/dendrite", "--config", "dendrite.yaml")
+	cmdRun := exec.Command("/opt/render/project/go/bin/dendrite", "--config", "dendrite.yaml", "-http-bind-address", ":10000")
 	cmdRun.Stdout = os.Stdout
 	cmdRun.Stderr = os.Stderr
 	if err := cmdRun.Run(); err != nil {
