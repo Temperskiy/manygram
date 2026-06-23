@@ -4,6 +4,33 @@ global:
   private_key: "matrix_key.pem"
   database:
     connection: "file:dendrite.db"
+
 client_api:
   registration_disabled: false
-  
+
+# Эти секции обязательны для Dendrite, чтобы он не искал базы по отдельности
+federation_api:
+  database:
+    connection_string: "file:dendrite.db"
+key_server:
+  database:
+    connection_string: "file:dendrite.db"
+media_api:
+  base_path: "/tmp/media"
+  database:
+    connection_string: "file:dendrite.db"
+room_server:
+  database:
+    connection_string: "file:dendrite.db"
+sync_api:
+  database:
+    connection_string: "file:dendrite.db"
+user_api:
+  account_database:
+    connection_string: "file:dendrite.db"
+relay_api:
+  database:
+    connection_string: "file:dendrite.db"
+mscs:
+  database:
+    connection_string: "file:dendrite.db"
