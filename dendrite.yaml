@@ -1,0 +1,32 @@
+version: 2
+
+global:
+  # 1. ОБЯЗАТЕЛЬНО ЗАМЕНИ НА СВОЮ ССЫЛКУ ОТ RENDER (без https:// и косых черт)
+  # Например: "tempers-matrix.onrender.com"
+  server_name: "твой-проект.onrender.com"
+  
+  # Путь к секретному ключу сервера (Dendrite сам создаст его при первом запуске)
+  private_key: "matrix_key.pem"
+  
+  # Настройка базы данных
+  database:
+    # Вариант для быстрого теста (SQLite). 
+    # ВНИМАНИЕ: На бесплатном тарифе Render этот файл будет удаляться при каждом перезапуске!
+    connection: "file:dendrite.db"
+
+logging:
+  - type: "std"
+    level: "info"
+
+client_api:
+  # Разрешаем регистрацию, чтобы ты мог создать свой аккаунт x8881488 при первом входе
+  registration_disabled: false
+  allow_guests: false
+
+media_api:
+  # Максимальный размер картинок/файлов, которые можно загружать в чат (50 МБ)
+  max_file_size_bytes: 52428800
+  dynamic_thumbnails: true
+
+sync_api:
+  real_time_channels: true
