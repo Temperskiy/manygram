@@ -7,17 +7,14 @@ import (
 )
 
 func main() {
-	// 1. Генерируем ключ прямо в текущей папке, если его нет
+	// Создаем пустой файл ключа, чтобы Dendrite его увидел при запуске
 	if _, err := os.Stat("matrix_key.pem"); os.IsNotExist(err) {
-		log.Println("Generating matrix_key.pem...")
-		cmdKey := exec.Command("/opt/render/project/go/bin/generate-keys", "--private-key", "matrix_key.pem")
-		cmdKey.Stdout = os.Stdout
-		cmdKey.Stderr = os.Stderr
-		_ = cmdKey.Run() // Пробуем сгенерировать
+		log.Println("Creating matrix_key.pem...")
+		os.WriteFile("matrix_key.pem", []byte(""), 0644)
 	}
 
-	// 2. Запускаем Dendrite
 	log.Println("Starting Dendrite...")
+	// Запускаем Dendrite с портом 10000
 	cmdRun := exec.Command("/opt/render/project/go/bin/dendrite", "--config", "dendrite.yaml", "-http-bind-address", ":10000")
 	cmdRun.Stdout = os.Stdout
 	cmdRun.Stderr = os.Stderr
