@@ -3,7 +3,7 @@ version: 2
 global:
   # 1. ОБЯЗАТЕЛЬНО ЗАМЕНИ НА СВОЮ ССЫЛКУ ОТ RENDER (без https:// и косых черт)
   # Например: "tempers-matrix.onrender.com"
-  server_name: "твой-проект.onrender.com"
+  server_name: "my-dendrite.onrender.com"
   
   # Путь к секретному ключу сервера (Dendrite сам создаст его при первом запуске)
   private_key: "matrix_key.pem"
